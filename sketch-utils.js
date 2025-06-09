@@ -1,68 +1,60 @@
-/** @type {SVGImage[]} */ 
-let linea_svg = [];
-
-/** @type {SVGImage[]} */
-let colore_svg = [];
-
-/** @type {Font} */
+let colore_emozioni = [];
+let linea_emozioni = [];
 let font;
-
-let angle = 0;
-
-let random_colore;
-let random_linea;
+let parola = "EMOLAND";
+let size = random(20, 150); 
 
 function preload() {
-  colore_svg = [
-    loadSVG("./assets/colore/1.svg"),
-    loadSVG("./assets/colore/2.svg"),
-    loadSVG("./assets/colore/3.svg"),
-    loadSVG("./assets/colore/4.svg"),
-    loadSVG("./assets/colore/5.svg"),
-    loadSVG("./assets/colore/6.svg"),
-    loadSVG("./assets/colore/7.svg"),
-    loadSVG("./assets/colore/8.svg"),
-  ];
-
-  linea_svg = [
-    loadSVG("./assets/linea/01.svg"),
-    loadSVG("./assets/linea/02.svg"),
-    loadSVG("./assets/linea/03.svg"),
-    loadSVG("./assets/linea/04.svg"),
-    loadSVG("./assets/linea/05.svg"),
-    loadSVG("./assets/linea/06.svg"),
-    loadSVG("./assets/linea/07.svg"),
-    loadSVG("./assets/linea/08.svg"),
-  ];
+  font = loadFont("./fonts/EMOLAND.ttf"); 
 }
 
 function setup() {
-  createCanvas(400, 400, SVG);
-  imageMode(CENTER);
-  frameRate(40); // 控制帧率
-
-
-  random_colore = random(colore_svg);
-  random_linea = random(linea_svg);
-}
-
-function draw() {
-  clear();
+  createCanvas(windowWidth, windowHeight); 
   background(255);
 
-  push();
-  translate(200, 200);
-  rotate(radians(angle));
-  image(random_colore, 0, 0, 250, 250);
-  pop();
 
+  textFont(font);
+  textSize(72);
+  textAlign(CENTER, CENTER);
+  fill(0);
+  text(parola, width / 2, height / 2);
 
-  push();
-  translate(200, 200);
-  rotate(radians(-angle));
-  image(random_linea, 0, 0, 250, 250);
-  pop();
+  
+  colore_emozioni = [
+    "./assets/colore/1.svg",
+    "./assets/colore/2.svg",
+    "./assets/colore/3.svg",
+    "./assets/colore/4.svg",
+    "./assets/colore/5.svg",
+    "./assets/colore/6.svg",
+    "./assets/colore/7.svg",
+    "./assets/colore/8.svg",
+  ];
 
+  linea_emozioni = [
+    "./assets/linea/01.svg",
+    "./assets/linea/02.svg",
+    "./assets/linea/03.svg",
+    "./assets/linea/04.svg",
+    "./assets/linea/05.svg",
+    "./assets/linea/06.svg",
+    "./assets/linea/07.svg",
+    "./assets/linea/08.svg",
+  ];
+}
 
-  angle += 0.5; 
+function mousePressed() {
+  let chosenPath = random(random() < 0.5 ? colore_emozioni : linea_emozioni);
+
+  let svgElemento = createImg(chosenPath, "svg-image");
+  svgElemento.position(mouseX, mouseY);
+
+  let size = random(50, 150); // 随机尺寸
+  svgElemento.size(size, size);
+
+  svgElemento.style('pointer-events', 'none');
+
+ setTimeout(() => {
+svgElemento.remove();
+ }, 10000);
 }
