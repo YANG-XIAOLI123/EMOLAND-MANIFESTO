@@ -49,7 +49,7 @@ function draw(){
 for (let i of immagini_disegnate) {
   push()
   translate(i.x, i.y)
-  rotate(frameCount)
+  rotate(frameCount*0.01)
  image(i.forma, 0, 0, i.dimensione, i.dimensione)
   pop()
 }
