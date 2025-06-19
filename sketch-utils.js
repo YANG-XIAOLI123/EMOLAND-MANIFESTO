@@ -65,7 +65,7 @@ function mousePressed() {
     forma:chosenPath,
     x:mouseX,
     y:mouseY,
-    dimensione:random(100,150)
+    dimensione:random(100,250)
     
   }
  )
