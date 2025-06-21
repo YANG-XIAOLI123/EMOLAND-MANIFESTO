@@ -51,9 +51,12 @@ for (let i of immagini_disegnate) {
   push()
   translate(i.x, i.y)
   rotate(frameCount*0.01)
+  
  image(i.forma, 0, 0, i.dimensione, i.dimensione)
   pop()
 }
+
+
 
 }
 
@@ -66,7 +69,7 @@ function mousePressed() {
     forma:chosenPath,
     x:mouseX,
     y:mouseY,
-    dimensione:random(100,250)
+    dimensione:random(50,150)
     
   }
  )
